@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="ace-ucmdb-plugin"/>
+    <!-- add our web resources -->
+    <web-resource key="ace-ucmdb-plugin-resources" name="ace-ucmdb-plugin Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <resource type="download" name="ace-ucmdb-plugin.css" location="/css/ace-ucmdb-plugin.css"/>
+        <resource type="download" name="ace-ucmdb-plugin.js" location="/js/ace-ucmdb-plugin.js"/>
+        <resource type="download" name="images/" location="/images"/>
+        <context>ace-ucmdb-plugin</context>
+    </web-resource>
+    <workflow-function key="ucmdb-ci-update-post-function" name="Ucmdb CI Update Post Function"
+                       i18n-name-key="ucmdb-ci-update-post-function.name"
+                       class="com.acedemand.jira.plugin.workflow.postfunction.UcmdbCIUpdatePostFunctionFactory">
+        <description key="ucmdb-ci-update-post-function.description">The Ucmdb CI Update Post Function Plugin
+        </description>
+        <function-class>com.acedemand.jira.plugin.workflow.postfunction.UcmdbCIUpdatePostFunction</function-class>
+        <resource type="velocity" name="view" location="templates/postfunctions/ucmdb-ci-update-post-function.vm"/>
+        <resource type="velocity" name="input-parameters"
+                  location="templates/postfunctions/ucmdb-ci-update-post-function-input.vm"/>
+        <resource type="velocity" name="edit-parameters"
+                  location="templates/postfunctions/ucmdb-ci-update-post-function-input.vm"/>
+    </workflow-function>
+
+    <servlet name="Impact Analysis Servlet" i18n-name-key="impact-analysis-servlet.name" key="impact-analysis-servlet"
+             class="com.acedemand.jira.plugin.servlet.ImpactAnalysisServlet">
+        <description key="impact-analysis-servlet.description">The Impact Analysis Servlet Plugin</description>
+        <url-pattern>/impactanalysisservlet</url-pattern>
+    </servlet>
+
+</atlassian-plugin>
